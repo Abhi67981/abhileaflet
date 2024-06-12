@@ -1,10 +1,23 @@
-var map = L.map('map').setView([52.30551506961271, -0.751231357187379], 14);
+var map = L.map('map').setView([53.26066624365998, -2.509240715372458], 16);
 
 var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-})
-osm.addTo(map);
+  maxZoom: 19,
+  attribution: '© OpenStreetMap'
+}).addTo(map); // Add osm layer to the map
 
+var OpenTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+	maxZoom: 17,
+	attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+});
+
+
+
+var baseMaps = {
+  "Open Street Map": osm,
+  "OpenTopoMap": OpenTopoMap
+};
+
+L.control.layers(baseMaps).addTo(map);
 var drawControl = new L.Control.Draw({
   draw: {
     polygon: true,
